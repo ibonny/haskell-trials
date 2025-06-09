@@ -8,9 +8,10 @@ import GHC.Generics (Generic)
 import Web.Scotty
 
 -- For JSON data
-newtype Message = Message {
-    content :: String
-} deriving (Generic, Show)
+newtype Message = Message
+  { content :: String
+  }
+  deriving (Generic, Show)
 
 instance ToJSON Message
 
