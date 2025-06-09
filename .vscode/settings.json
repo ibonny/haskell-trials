@@ -1,0 +1,5 @@
+{
+    "editor.minimap.enabled": false,
+    "haskell.checkProject": true,
+    "haskell.formattingProvider": "fourmolu"
+}

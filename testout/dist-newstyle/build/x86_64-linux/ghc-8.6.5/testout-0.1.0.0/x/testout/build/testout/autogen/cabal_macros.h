@@ -20,6 +20,16 @@
   (major1) == 4 && (major2) <  12 || \
   (major1) == 4 && (major2) == 12 && (minor) <= 0)
 #endif /* MIN_VERSION_base */
+/* package testout-0.1.0.0 */
+#ifndef VERSION_testout
+#define VERSION_testout "0.1.0.0"
+#endif /* VERSION_testout */
+#ifndef MIN_VERSION_testout
+#define MIN_VERSION_testout(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  1 || \
+  (major1) == 0 && (major2) == 1 && (minor) <= 0)
+#endif /* MIN_VERSION_testout */
 
 /* tool gcc-9 */
 #ifndef TOOL_VERSION_gcc
