@@ -1,0 +1,17 @@
+cabal-version:      3.0
+name:               default
+version:            0.1.0.0
+
+license:            MIT
+build-type:         Simple
+
+executable testout
+  hs-source-dirs:   .
+  main-is:          first.hs
+  default-language: Haskell2010
+  build-depends:    base          >=4.7 && <5
+
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
