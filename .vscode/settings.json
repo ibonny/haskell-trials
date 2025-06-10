@@ -1,5 +1,8 @@
 {
     "editor.minimap.enabled": false,
     "haskell.checkProject": true,
-    "haskell.formattingProvider": "fourmolu"
+    "haskell.formattingProvider": "fourmolu",
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false
 }

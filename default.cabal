@@ -5,9 +5,24 @@ version:            0.1.0.0
 license:            MIT
 build-type:         Simple
 
-executable testout
+executable first
   hs-source-dirs:   .
   main-is:          first.hs
+  default-language: Haskell2010
+  build-depends:    base          >=4.7 && <5
+
+executable second
+  hs-source-dirs:   .
+  main-is:          second.hs
+  default-language: Haskell2010
+  build-depends:    base          >=4.7 && <5
+                  , aeson
+                  , http-client
+                  , http-client-tls
+
+executable third
+  hs-source-dirs:   .
+  main-is:          third.hs
   default-language: Haskell2010
   build-depends:    base          >=4.7 && <5
 
