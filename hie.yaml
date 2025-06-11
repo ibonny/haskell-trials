@@ -1,3 +1,5 @@
 cradle:
   cabal:
     component: "sample-scotty-project:lib"
+  direct:
+    arguments: []
