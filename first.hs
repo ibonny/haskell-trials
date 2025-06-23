@@ -8,5 +8,5 @@ fib n = fibs !! n
 
 main :: IO ()
 main = do
-    putStrLn "Hello, World!"
-    putStrLn $ "The 10th Fibonacci number is: " ++ show (fib 100)
+  putStrLn "Hello, World!"
+  putStrLn $ "The 10th Fibonacci number is: " ++ show (fib 100)

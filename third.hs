@@ -1,9 +1,10 @@
-lineSplitter :: String -> [String]
-lineSplitter = lines
+lineSplitter :: String -> IO [String]
+lineSplitter filename = do
+  contents <- readFile filename
+  return $ lines contents
 
 main :: IO ()
 main = do
   putStrLn "A first test. Let's see if it works."
-  contents <- readFile "default.cabal"
-  let splitLines = lineSplitter contents
+  splitLines <- lineSplitter "default.cabal"
   mapM_ putStrLn splitLines

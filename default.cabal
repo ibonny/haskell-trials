@@ -11,6 +11,11 @@ executable first
   default-language: Haskell2010
   build-depends:    base          >=4.7 && <5
 
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
 executable second
   hs-source-dirs:   .
   main-is:          second.hs
@@ -20,11 +25,29 @@ executable second
                   , http-client
                   , http-client-tls
 
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
 executable third
   hs-source-dirs:   .
   main-is:          third.hs
   default-language: Haskell2010
   build-depends:    base          >=4.7 && <5
+
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+executable fourth
+  hs-source-dirs:   .
+  main-is:          fourth.hs
+  default-language: Haskell2010
+  build-depends:    base          >=4.7 && <5
+                  , http-conduit
+                  , bytestring
 
   ghc-options:
     -Wall -Wcompat -Widentities -Wincomplete-record-updates
