@@ -1,1 +1,1 @@
-image: haskell:slim-bullseye
+image: lierdakil/alpine-haskell:9.4.8-pwsh
