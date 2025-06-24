@@ -53,3 +53,14 @@ executable fourth
     -Wall -Wcompat -Widentities -Wincomplete-record-updates
     -Wincomplete-uni-patterns -Wmissing-export-lists
     -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+executable monadic-test
+  hs-source-dirs:   .
+  main-is:          monadic-test.hs
+  default-language: Haskell2010
+  build-depends:    base          >=4.7 && <5
+
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
