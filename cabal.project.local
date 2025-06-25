@@ -1,2 +1,2 @@
 ignore-project: False
-with-compiler: /opt/.ghcup/bin/ghc
+with-compiler: /home/gitpod/.ghcup/bin/ghc
