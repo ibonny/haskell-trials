@@ -6,5 +6,5 @@
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   "haskell.hlint.executablePath": "/home/gitpod/.local/bin/hlint",
-  "haskell.ghcupExecutablePath": "/opt/ghcup"
+  "haskell.ghcupExecutablePath": "/home/gitpod/.local/bin/ghcup"
 }
