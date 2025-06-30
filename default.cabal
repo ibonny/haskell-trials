@@ -119,6 +119,20 @@ executable rosalind_prob
   main-is:          rosalind_prob.hs
   default-language: Haskell2010
   build-depends:    base          >=4.7 && <5
+                  , split
+                  , text
+
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+executable rosalind_sign
+  hs-source-dirs:   .
+  main-is:          rosalind_sign.hs
+  default-language: Haskell2010
+  build-depends:    base          >=4.7 && <5
+                  , text
 
   ghc-options:
     -Wall -Wcompat -Widentities -Wincomplete-record-updates
