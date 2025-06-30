@@ -91,3 +91,36 @@ executable rosalind_lgis
     -Wall -Wcompat -Widentities -Wincomplete-record-updates
     -Wincomplete-uni-patterns -Wmissing-export-lists
     -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+executable rosalind_pmch
+  hs-source-dirs:   .
+  main-is:          rosalind_pmch.hs
+  default-language: Haskell2010
+  build-depends:    base          >=4.7 && <5
+
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+executable rosalind_pper
+  hs-source-dirs:   .
+  main-is:          rosalind_pper.hs
+  default-language: Haskell2010
+  build-depends:    base          >=4.7 && <5
+
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+
+executable rosalind_prob
+  hs-source-dirs:   .
+  main-is:          rosalind_prob.hs
+  default-language: Haskell2010
+  build-depends:    base          >=4.7 && <5
+
+  ghc-options:
+    -Wall -Wcompat -Widentities -Wincomplete-record-updates
+    -Wincomplete-uni-patterns -Wmissing-export-lists
+    -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
