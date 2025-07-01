@@ -1,5 +1,10 @@
 cradle:
   cabal:
-    component: "sample-scotty-project:lib"
-  direct:
-    arguments: []
+    - path: "app"
+      component: "exe:rosalind_prob"
+    - path: "app"
+      component: "exe:second"
+    - path: "app"
+      component: "exe:fourth"
+    - path: "app"
+      component: "exe:monadic-test"

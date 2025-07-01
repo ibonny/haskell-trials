@@ -9,5 +9,7 @@
   "haskell.ghcupExecutablePath": "/home/gitpod/.local/bin/ghcup",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "haskell.haskell",
-  "notebook.defaultFormatter": "haskell.haskell"
+  "notebook.defaultFormatter": "haskell.haskell",
+  "haskell.manageHLS": "GHCup",
+  "haskell.plugin.cabal-gild.config.path": "/home/gitpod/.local/bin/cabal-gild"
 }
