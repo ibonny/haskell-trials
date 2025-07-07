@@ -1,3 +1,3 @@
+package-dbs: clear, global
 ignore-project: False
-with-compiler: /home/codespace/.ghcup/bin/ghc
-packages: .
+tests: True
