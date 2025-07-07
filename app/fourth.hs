@@ -1,18 +1,18 @@
-import Text.Printf (printf)
-import Network.HTTP.Simple
 import qualified Data.ByteString.Char8 as B
+import Network.HTTP.Simple
+import Text.Printf (printf)
 
 forLoopTest :: Int -> IO ()
 forLoopTest 5 = return ()
 forLoopTest val = do
   printf "Doing this step %d times.\n" val
-  forLoopTest (val+1)
+  forLoopTest (val + 1)
 
 repeatNTimes :: (Monad m) => Int -> m a -> m ()
 repeatNTimes 0 _ = return ()
 repeatNTimes n action = do
   _ <- action
-  repeatNTimes (n-1) action
+  repeatNTimes (n - 1) action
 
 getLinesFromFile :: FilePath -> IO [String]
 getLinesFromFile filename = do
@@ -43,4 +43,3 @@ main = do
   content <- getDataFromWebsite "https://jsonplaceholder.typicode.com/posts"
 
   putStrLn $ stripCR $ B.unpack content
-  

@@ -258,3 +258,22 @@ executable rosalind_tran
     -Wmissing-home-modules
     -Wpartial-fields
     -Wredundant-constraints
+
+executable ansi-test
+  main-is: ansi-test.hs
+  hs-source-dirs: app
+  default-language: Haskell2010
+  build-depends:
+    base >=4.7 && <5,
+    ansi-terminal
+
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Widentities
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+    -Wmissing-export-lists
+    -Wmissing-home-modules
+    -Wpartial-fields
+    -Wredundant-constraints

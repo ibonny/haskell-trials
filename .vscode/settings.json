@@ -5,11 +5,11 @@
   "editor.renderWhitespace": "all",
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
-  "haskell.hlint.executablePath": "/home/gitpod/.local/bin/hlint",
-  "haskell.ghcupExecutablePath": "/home/gitpod/.local/bin/ghcup",
+  "haskell.hlint.executablePath": "/home/codespace/.local/bin/hlint",
+  "haskell.ghcupExecutablePath": "/home/codespace/.ghcup/bin/ghcup",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "haskell.haskell",
   "notebook.defaultFormatter": "haskell.haskell",
   "haskell.manageHLS": "GHCup",
-  "haskell.plugin.cabal-gild.config.path": "/home/gitpod/.local/bin/cabal-gild"
+  "haskell.plugin.cabal-gild.config.path": "/home/codespace/.local/bin/cabal-gild"
 }
