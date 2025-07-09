@@ -3,18 +3,19 @@
 
 module Main (main) where
 
+import Control.Applicative
+import Control.Monad
+import Data.Aeson (FromJSON, eitherDecode, parseJSON)
+import Data.Time.Clock
+import Data.Time.Clock.POSIX
+import Data.Time.Format
+import Data.Time.LocalTime
 import GHC.Generics
-import Data.Aeson (eitherDecode, FromJSON, parseJSON)
 import Network.HTTP.Simple
 import System.Environment
 import System.Exit
-import Control.Monad
-import Control.Applicative
 import Text.Printf (printf)
-import Data.Time.Clock.POSIX
-import Data.Time.Format
-import Data.Time.Clock
-import Data.Time.LocalTime
+import Data.Maybe (fromMaybe)
 
 -- https://aviationweather.gov/api/data/metar?ids=KMCI&format=json
 
@@ -25,67 +26,71 @@ import Data.Time.LocalTime
 -- "base":25000}]}]
 
 data NumberOrString
-    = NumberValue Int
-    | NumStringValue String
-    deriving (Show, Generic)
+  = NumberValue Int
+  | NumStringValue String
+  deriving (Show, Generic)
 
 instance FromJSON NumberOrString where
-    parseJSON v = (NumberValue <$> parseJSON v)
-              <|> (NumStringValue <$> parseJSON v)
+  parseJSON v =
+    (NumberValue <$> parseJSON v)
+      <|> (NumStringValue <$> parseJSON v)
 
 data FloatOrString
-    = FloatValue Float
-    | FloatStringValue String
-    deriving (Show, Generic)
+  = FloatValue Float
+  | FloatStringValue String
+  deriving (Show, Generic, Eq)
 
 instance FromJSON FloatOrString where
-    parseJSON v = (FloatValue <$> parseJSON v)
-              <|> (FloatStringValue <$> parseJSON v)
+  parseJSON v =
+    (FloatValue <$> parseJSON v)
+      <|> (FloatStringValue <$> parseJSON v)
 
 data Clouds = Clouds
-    { cover :: String
-    , base :: Maybe Int
-    } deriving (Show, Generic)
+  { cover :: String,
+    base :: Maybe Int
+  }
+  deriving (Show, Generic)
 
 instance FromJSON Clouds
 
 data Weather = Weather
-    { metar_id :: Int
-    , icaoId :: String
-    , receiptTime :: String
-    , obsTime :: Integer
-    , reportTime :: String
-    , temp :: Float
-    , dewp :: Float
-    , wdir :: NumberOrString
-    , wspd :: Int
-    , wgst :: Maybe Int
-    , visib :: NumberOrString
-    , altim :: Float
-    , slp :: Float
-    , qcField :: Int
-    , wxString :: Maybe String
-    , presTend :: Maybe String
-    , maxT :: Maybe Float
-    , minT :: Maybe Float
-    , maxT24 :: Maybe Float
-    , minT24 :: Maybe Float
-    , precip :: Maybe Float
-    , pcp3hr :: Maybe Float
-    , pcp6hr :: Maybe Float
-    , pcp24hr :: Maybe Float
-    , snow :: Maybe Float
-    , vertVis :: Float
-    , metarType :: String
-    , rawOb :: String
-    , mostRecent :: Int
-    , lat :: Float
-    , lon :: Float
-    , elev :: Int
-    , prior :: Int
-    , name :: String
-    , clouds :: [Clouds]
-    } deriving (Show, Generic)
+  { metar_id :: Int,
+    icaoId :: String,
+    receiptTime :: String,
+    obsTime :: Integer,
+    reportTime :: String,
+    temp :: Float,
+    dewp :: Float,
+    wdir :: NumberOrString,
+    wspd :: Int,
+    wgst :: Maybe Int,
+    visib :: NumberOrString,
+    altim :: Float,
+    slp :: Float,
+    qcField :: Int,
+    wxString :: Maybe String,
+    presTend :: Maybe FloatOrString,
+    maxT :: Maybe Float,
+    minT :: Maybe Float,
+    maxT24 :: Maybe Float,
+    minT24 :: Maybe Float,
+    precip :: Maybe FloatOrString,
+    pcp3hr :: Maybe Float,
+    pcp6hr :: Maybe Float,
+    pcp24hr :: Maybe Float,
+    snow :: Maybe Float,
+    vertVis :: Float,
+    metarType :: String,
+    rawOb :: String,
+    mostRecent :: Int,
+    lat :: Float,
+    lon :: Float,
+    elev :: Int,
+    prior :: Int,
+    name :: String,
+    clouds :: [Clouds]
+  }
+  deriving (Show, Generic)
 
 instance FromJSON Weather
 
@@ -102,12 +107,16 @@ customTimeZone = TimeZone (-300) False "EST5EDT"
 
 timestampToCustomTZ :: Integer -> ZonedTime
 timestampToCustomTZ timestamp =
-    let utcTime = timestampToUTC timestamp
-    in utcToZonedTime customTimeZone utcTime
+  let utcTime = timestampToUTC timestamp
+   in utcToZonedTime customTimeZone utcTime
 
 numProcessField :: NumberOrString -> String
 numProcessField (NumberValue n) = show n
 numProcessField (NumStringValue s) = s
+
+numProcessFieldToNum :: NumberOrString -> Int
+numProcessFieldToNum (NumberValue n) = n
+numProcessFieldToNum (NumStringValue _) = 0
 
 floatProcessField :: FloatOrString -> String
 floatProcessField (FloatValue n) = show n
@@ -115,50 +124,99 @@ floatProcessField (FloatStringValue s) = s
 
 makeGetRequest :: String -> IO (Either String [Weather])
 makeGetRequest url = do
-    request <- parseRequest url
-    response <- httpLBS request
-    -- putStrLn $ "Status code: " ++ show (getResponseStatusCode response)
-    -- return $ L.unpack (getResponseBody response)
-    return $ eitherDecode (getResponseBody response)
+  request <- parseRequest url
+  response <- httpLBS request
+  -- putStrLn $ "Status code: " ++ show (getResponseStatusCode response)
+  -- return $ L.unpack (getResponseBody response)
+  return $ eitherDecode (getResponseBody response)
+
+getWindDirString :: Int -> String
+getWindDirString val
+    | val == 0 = "North"
+    | val > 0 && val < 45 = "North North-East"
+    | val == 45 = "North East"
+    | val > 45 && val < 90 = "East North-East"
+    | val == 90 = "East"
+    | val > 90 && val < 135 = "East South-East"
+    | val == 135 = "South East"
+    | val > 135 && val < 180 = "South South-East"
+    | val == 180 = "South"
+    | val > 180 && val < 225 = "South South-West"
+    | val == 225 = "South West"
+    | val > 225 && val < 275 = "West South-West"
+    | val == 270 = "West"
+    | val > 270 && val < 315 = "West North-West"
+    | val == 315 = "North West"
+    | val > 315 && val < 360 = "North North-West"
+    | otherwise = printf "%d" val
+
+defaultNumStringValue :: NumberOrString
+defaultNumStringValue = NumStringValue "0"
+
+defaultFloatStringValue :: FloatOrString
+defaultFloatStringValue = FloatStringValue "0"
 
 outputData :: Weather -> IO ()
 outputData weather = do
-    printf "Name: %s\n" $ name weather
+  printf "Name: %s\n" $ name weather
 
-    -- let date = timestampToUTC $ obsTime weather
-    -- let obsTimeStr = formatDate date
+  -- let date = timestampToUTC $ obsTime weather
+  -- let obsTimeStr = formatDate date
 
-    let localTime = timestampToCustomTZ $ obsTime weather
+  let localTime = timestampToCustomTZ $ obsTime weather
 
-    printf "Observation time: %s\n" $ formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S %Z" localTime
-    printf "METAR: %s\n" $ rawOb weather
-    printf "Wind Dir: %s\n" $ numProcessField $ wdir weather
-    printf "Wind Speed: %d\n" $ wspd weather
-    printf "Altimeter: %0.2f\n" $ altim weather
-    printf "Visibility: %s\n" $ numProcessField $ visib weather
+  printf "Observation time: %s\n" $ formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S %Z" localTime
+  printf "METAR: %s\n" $ rawOb weather
 
-    case pcp24hr weather of
-        Just number -> printf "Precip last 24 hours: %0.2f\n" number
-        Nothing -> printf "Precip last 24 hours: None.\n"
+  if wspd weather /= 0 then do
+    printf "Wind Dir: %s\n" $ getWindDirString $ numProcessFieldToNum $ wdir weather
+    printf "Wind Speed: %dmph " $ wspd weather
+  else
+    printf "No wind"
 
-    printf "Elevation: %dft ASL\n" $ elev weather
+  if fromMaybe 0 (wgst weather) /= 0 then
+    printf "gusting to %dmph\n" $ fromMaybe 0 $ wgst weather
+  else
+    printf "\n"
+
+  printf "Pressure Tendency: %s mBar\n" $ floatProcessField $ fromMaybe defaultFloatStringValue $ presTend weather
+  printf "Altimeter: %0.2f\n" $ altim weather
+  printf "Visibility: %s\n" $ numProcessField $ visib weather
+
+  if fromMaybe defaultFloatStringValue (precip weather) /= defaultFloatStringValue then
+    printf "Precipitation: %s in\n" $ floatProcessField $ fromMaybe defaultFloatStringValue $ precip weather
+  else
+    printf ""
+
+  case pcp24hr weather of
+    Just number -> printf "Precip last 24 hours: %0.2f\n" number
+    Nothing -> printf ""
+
+  printf "Elevation: %dft ASL\n" $ elev weather
+
+loopData :: [Weather] -> IO ()
+loopData weather =
+    if null weather then
+        printf "Airport cannot be found.\n"
+    else
+        mapM_ outputData weather
 
 main :: IO ()
 main = do
-    args <- getArgs
+  args <- getArgs
 
-    when (null args) $ do
-        putStrLn "Error: No arguments provided"
-        exitFailure
+  when (null args) $ do
+    putStrLn "Error: No arguments provided"
+    exitFailure
 
-    let location = case args of
-            [arg1] -> arg1
-            _ -> "KTPA"
+  let location = case args of
+        [arg1] -> arg1
+        _ -> "KTPA"
 
-    let urlStr = "https://aviationweather.gov/api/data/metar?ids=" ++ location ++ "&format=json"
+  let urlStr = "https://aviationweather.gov/api/data/metar?ids=" ++ location ++ "&format=json"
 
-    result <- makeGetRequest urlStr
+  result <- makeGetRequest urlStr
 
-    case result of
-        Right weather -> mapM_ outputData weather -- (take 2 posts)  -- Show first 2 posts
-        Left err -> putStrLn err
+  case result of
+    Right weather -> loopData weather
+    Left err -> putStrLn err
