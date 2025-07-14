@@ -122,6 +122,31 @@ floatProcessField :: FloatOrString -> String
 floatProcessField (FloatValue n) = show n
 floatProcessField (FloatStringValue s) = s
 
+floatProcessFieldToFloat :: FloatOrString -> Float
+floatProcessFieldToFloat (FloatValue n) = n
+floatProcessFieldToFloat (FloatStringValue _) = 0
+
+-- Conversion functions
+
+metersToFeet :: Int -> Float
+metersToFeet e = fromIntegral e * 3.28084
+
+knotsToMph :: Int -> Float
+knotsToMph windSpeedKt = fromIntegral windSpeedKt * 1.15078
+
+celciusToFahrenheight :: Float -> Float
+celciusToFahrenheight cValue = 9/5 * cValue + 32
+
+calculateRelativeHumidity :: Float -> Float -> Float
+calculateRelativeHumidity temp_c dewpoint_c =
+  -- Magnus formula coefficients
+  let a = 17.625
+      b = 243.04
+      alpha = (a * dewpoint_c) / (b + dewpoint_c)
+      beta  = (a * temp_c) / (b + temp_c)
+   in 100 * exp (alpha - beta)
+
+-- Get request function
 makeGetRequest :: String -> IO (Either String [Weather])
 makeGetRequest url = do
   request <- parseRequest url
@@ -169,19 +194,31 @@ outputData weather = do
   printf "METAR: %s\n" $ rawOb weather
 
   if wspd weather /= 0 then do
-    printf "Wind Dir: %s\n" $ getWindDirString $ numProcessFieldToNum $ wdir weather
-    printf "Wind Speed: %dmph " $ wspd weather
+    printf "Wind Dir: %s (%s)\n" (getWindDirString $ numProcessFieldToNum $ wdir weather) (numProcessField $ wdir weather)
+    printf "Wind Speed: %0.2fmph " $ knotsToMph $ wspd weather
   else
     printf "No wind"
 
   if fromMaybe 0 (wgst weather) /= 0 then
-    printf "gusting to %dmph\n" $ fromMaybe 0 $ wgst weather
+    printf "gusting to %0.2fmph\n" $ knotsToMph $ fromMaybe 0 $ wgst weather
   else
     printf "\n"
 
-  printf "Pressure Tendency: %s mBar\n" $ floatProcessField $ fromMaybe defaultFloatStringValue $ presTend weather
-  printf "Altimeter: %0.2f\n" $ altim weather
-  printf "Visibility: %s\n" $ numProcessField $ visib weather
+  printf "Temperature: %0.2fF\n" $ celciusToFahrenheight $ temp weather
+  printf "Dew Point: %0.2fF\n" $ celciusToFahrenheight $ dewp weather
+
+  printf "Relative Humidity: %0.2f%%\n" $ calculateRelativeHumidity (temp weather) (dewp weather)
+
+  if floatProcessFieldToFloat (fromMaybe defaultFloatStringValue (presTend weather)) /= 0 then
+    printf "Pressure Tendency: %s mBar\n" $ floatProcessField $ fromMaybe defaultFloatStringValue $ presTend weather
+  else
+    printf ""
+
+  printf "Altimeter: %0.2f mb\n" $ altim weather
+
+  printf "Sea Level Pressure: %0.2f mb\n" $ slp weather
+
+  printf "Visibility: %s statute miles\n" $ numProcessField $ visib weather
 
   if fromMaybe defaultFloatStringValue (precip weather) /= defaultFloatStringValue then
     printf "Precipitation: %s in\n" $ floatProcessField $ fromMaybe defaultFloatStringValue $ precip weather
@@ -192,7 +229,7 @@ outputData weather = do
     Just number -> printf "Precip last 24 hours: %0.2f\n" number
     Nothing -> printf ""
 
-  printf "Elevation: %dft ASL\n" $ elev weather
+  printf "Elevation: %0.2fft MSL\n" $ metersToFeet $ elev weather
 
 loopData :: [Weather] -> IO ()
 loopData weather =
