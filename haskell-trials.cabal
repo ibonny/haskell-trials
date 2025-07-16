@@ -322,3 +322,42 @@ executable rotating-cube-2
     -Wmissing-home-modules
     -Wpartial-fields
     -Wredundant-constraints
+
+executable rosalind_cat
+  main-is: rosalind_cat.hs
+  hs-source-dirs: app
+  default-language: Haskell2010
+  build-depends:
+    array,
+    base >=4.7 && <5,
+
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Widentities
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+    -Wmissing-export-lists
+    -Wmissing-home-modules
+    -Wpartial-fields
+    -Wredundant-constraints
+
+executable rosalind_corr
+  main-is: rosalind_corr.hs
+  hs-source-dirs: app
+  default-language: Haskell2010
+  build-depends:
+    array,
+    base >=4.7 && <5,
+    containers,
+
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Widentities
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+    -Wmissing-export-lists
+    -Wmissing-home-modules
+    -Wpartial-fields
+    -Wredundant-constraints
