@@ -1,363 +1,317 @@
-cabal-version: 3.0
-name: haskell-trials
-version: 0.1.0.0
-license: MIT
-license-file: LICENSE
-author: ibonny
-maintainer: ibonny@gmail.com
-build-type: Simple
-extra-doc-files: CHANGELOG.md
+cabal-version: 1.18
 
-common warnings
-  ghc-options: -Wall
+-- This file has been generated from package.yaml by hpack version 0.38.1.
+--
+-- see: https://github.com/sol/hpack
 
-executable haskell-trials
-  import: warnings
-  main-is: Main.hs
-  build-depends: base ^>=4.18.3.0
-  hs-source-dirs: app
-  default-language: Haskell2010
-
-executable first
-  hs-source-dirs: .
-  main-is: first.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends: base >=4.7 && <5
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable second
-  hs-source-dirs: .
-  main-is: second.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends:
-    aeson >=2.2.3.0,
-    base >=4.7 && <5,
-    http-client,
-    http-client-tls,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable third
-  hs-source-dirs: .
-  main-is: third.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends: base >=4.7 && <5
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable fourth
-  main-is: fourth.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends:
-    base >=4.7 && <5,
-    bytestring,
-    http-conduit,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable monadic-test
-  main-is: monadic-test.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends:
-    base >=4.7 && <5,
-    bytestring >=0.11.5.4,
-    http-conduit >=2.3.9.1,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rosalind_splc
-  main-is: rosalind_splc.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends:
-    base >=4.7 && <5,
-    text,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rosalind_lgis
-  main-is: rosalind_lgis.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends:
-    base >=4.7 && <5,
-    split,
-    text,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rosalind_pmch
-  main-is: rosalind_pmch.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends: base >=4.7 && <5
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rosalind_pper
-  main-is: rosalind_pper.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends: base >=4.7 && <5
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rosalind_prob
-  main-is: rosalind_prob.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends:
-    base >=4.7 && <5,
-    split,
-    text,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rosalind_sign
-  main-is: rosalind_sign.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends:
-    base >=4.7 && <5,
-    text,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rosalind_sseq
-  main-is: rosalind_sseq.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends: base >=4.7 && <5
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rosalind_tran
-  main-is: rosalind_tran.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
-  build-depends:
-    base >=4.7 && <5,
-    split,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
+name:           haskell-trials
+version:        0.1.0.0
+author:         ibonny
+maintainer:     ibonny@gmail.com
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+extra-doc-files:
+    CHANGELOG.md
 
 executable ansi-test
   main-is: ansi-test.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-    ansi-terminal,
-    base >=4.7 && <5,
-    vector,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rotating-cube
-  main-is: rotating-cube.hs
-  hs-source-dirs: app
+      ansi-terminal
+    , base >=4.7 && <5
+    , vector
   default-language: Haskell2010
+
+executable first
+  main-is: first.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-    ansi-terminal ^>=1.1.2,
-    base >=4.7 && <5,
-    mtl,
-    vector,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
-
-executable rotating-cube-2
-  main-is: rotating-cube-2.hs
-  hs-source-dirs: app
+      base >=4.7 && <5
   default-language: Haskell2010
-  build-depends:
-    ansi-terminal ^>=1.1.2,
-    array,
-    base >=4.7 && <5,
-    mtl,
-    terminal-size,
-    vector,
 
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
+executable fourth
+  main-is: fourth.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , http-conduit
+  default-language: Haskell2010
+
+executable haskell-trials
+  main-is: Main.hs
+  other-modules:
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.18.3.0 && <4.19
+  default-language: Haskell2010
+
+executable monadic-test
+  main-is: monadic-test.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , bytestring >=0.11.5.4
+    , http-conduit >=2.3.9.1
+  default-language: Haskell2010
 
 executable rosalind_cat
   main-is: rosalind_cat.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-    array,
-    base >=4.7 && <5,
-
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
+      array
+    , base >=4.7 && <5
+  default-language: Haskell2010
 
 executable rosalind_corr
   main-is: rosalind_corr.hs
-  hs-source-dirs: app
-  default-language: Haskell2010
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-    array,
-    base >=4.7 && <5,
-    containers,
+      array
+    , base >=4.7 && <5
+    , containers
+  default-language: Haskell2010
 
-  ghc-options:
-    -Wall
-    -Wcompat
-    -Widentities
-    -Wincomplete-record-updates
-    -Wincomplete-uni-patterns
-    -Wmissing-export-lists
-    -Wmissing-home-modules
-    -Wpartial-fields
-    -Wredundant-constraints
+executable rosalind_inod
+  main-is: rosalind_inod.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable rosalind_kmer
+  main-is: rosalind_kmer.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable rosalind_kmp
+  main-is: rosalind_kmp.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable rosalind_lcsq
+  main-is: rosalind_lcsq.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable rosalind_lgis
+  main-is: rosalind_lgis.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , split
+    , text
+  default-language: Haskell2010
+
+executable rosalind_pmch
+  main-is: rosalind_pmch.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable rosalind_pper
+  main-is: rosalind_pper.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable rosalind_prob
+  main-is: rosalind_prob.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , split
+    , text
+  default-language: Haskell2010
+
+executable rosalind_sign
+  main-is: rosalind_sign.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , text
+  default-language: Haskell2010
+
+executable rosalind_splc
+  main-is: rosalind_splc.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , text
+  default-language: Haskell2010
+
+executable rosalind_sseq
+  main-is: rosalind_sseq.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable rosalind_tran
+  main-is: rosalind_tran.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , split
+  default-language: Haskell2010
+
+executable rotating-cube
+  main-is: rotating-cube.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      ansi-terminal >=1.1.2 && <1.2
+    , base >=4.7 && <5
+    , mtl
+    , vector
+  default-language: Haskell2010
+
+executable rotating-cube-2
+  main-is: rotating-cube-2.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      ansi-terminal >=1.1.2 && <1.2
+    , array
+    , base >=4.7 && <5
+    , mtl
+    , terminal-size
+    , vector
+  default-language: Haskell2010
+
+executable second
+  main-is: second.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      aeson >=2.2.3.0
+    , base >=4.7 && <5
+    , http-client
+    , http-client-tls
+  default-language: Haskell2010
+
+executable third
+  main-is: third.hs
+  other-modules:
+      Main
+      Paths_haskell_trials
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010

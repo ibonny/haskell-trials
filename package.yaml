@@ -1,0 +1,157 @@
+name: haskell-trials
+version: 0.1.0.0
+license: MIT
+license-file: LICENSE
+author: ibonny
+maintainer: ibonny@gmail.com
+extra-doc-files: CHANGELOG.md
+
+# Common dependencies and GHC options for all executables
+dependencies:
+  - base >= 4.7 && < 5
+
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-export-lists
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
+
+executables:
+  haskell-trials:
+    main: Main.hs
+    source-dirs: app
+    dependencies:
+      - base ^>= 4.18.3.0
+
+  first:
+    main: first.hs
+    source-dirs: app
+
+  second:
+    main: second.hs
+    source-dirs: app
+    dependencies:
+      - aeson >= 2.2.3.0
+      - http-client
+      - http-client-tls
+
+  third:
+    main: third.hs
+    source-dirs: app
+
+  fourth:
+    main: fourth.hs
+    source-dirs: app
+    dependencies:
+      - bytestring
+      - http-conduit
+
+  monadic-test:
+    main: monadic-test.hs
+    source-dirs: app
+    dependencies:
+      - bytestring >= 0.11.5.4
+      - http-conduit >= 2.3.9.1
+
+  rosalind_splc:
+    main: rosalind_splc.hs
+    source-dirs: app
+    dependencies:
+      - text
+
+  rosalind_lgis:
+    main: rosalind_lgis.hs
+    source-dirs: app
+    dependencies:
+      - split
+      - text
+
+  rosalind_pmch:
+    main: rosalind_pmch.hs
+    source-dirs: app
+
+  rosalind_pper:
+    main: rosalind_pper.hs
+    source-dirs: app
+
+  rosalind_prob:
+    main: rosalind_prob.hs
+    source-dirs: app
+    dependencies:
+      - split
+      - text
+
+  rosalind_sign:
+    main: rosalind_sign.hs
+    source-dirs: app
+    dependencies:
+      - text
+
+  rosalind_sseq:
+    main: rosalind_sseq.hs
+    source-dirs: app
+
+  rosalind_tran:
+    main: rosalind_tran.hs
+    source-dirs: app
+    dependencies:
+      - split
+
+  ansi-test:
+    main: ansi-test.hs
+    source-dirs: app
+    dependencies:
+      - ansi-terminal
+      - vector
+
+  rotating-cube:
+    main: rotating-cube.hs
+    source-dirs: app
+    dependencies:
+      - ansi-terminal ^>= 1.1.2
+      - mtl
+      - vector
+
+  rotating-cube-2:
+    main: rotating-cube-2.hs
+    source-dirs: app
+    dependencies:
+      - ansi-terminal ^>= 1.1.2
+      - array
+      - mtl
+      - terminal-size
+      - vector
+
+  rosalind_cat:
+    main: rosalind_cat.hs
+    source-dirs: app
+    dependencies:
+      - array
+
+  rosalind_corr:
+    main: rosalind_corr.hs
+    source-dirs: app
+    dependencies:
+      - array
+      - containers
+
+  rosalind_inod:
+    main: rosalind_inod.hs
+    source-dirs: app
+
+  rosalind_kmer:
+    main: rosalind_kmer.hs
+    source-dirs: app
+
+  rosalind_kmp:
+    main: rosalind_kmp.hs
+    source-dirs: app
+
+  rosalind_lcsq:
+    main: rosalind_lcsq.hs
+    source-dirs: app
