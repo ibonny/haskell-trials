@@ -1,10 +1,196 @@
 cradle:
   cabal:
-    - path: "app"
-      component: "exe:rosalind_prob"
-    - path: "app"
-      component: "exe:second"
-    - path: "app"
-      component: "exe:fourth"
-    - path: "app"
-      component: "exe:monadic-test"
+    - path: "app/ansi-test.hs"
+      component: "haskell-trials:exe:ansi-test"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:ansi-test"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:ansi-test"
+
+    - path: "app/first.hs"
+      component: "haskell-trials:exe:first"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:first"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:first"
+
+    - path: "app/fourth.hs"
+      component: "haskell-trials:exe:fourth"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:fourth"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:fourth"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:haskell-trials"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:haskell-trials"
+
+    - path: "app/monadic-test.hs"
+      component: "haskell-trials:exe:monadic-test"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:monadic-test"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:monadic-test"
+
+    - path: "app/rosalind_cat.hs"
+      component: "haskell-trials:exe:rosalind_cat"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_cat"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_cat"
+
+    - path: "app/rosalind_corr.hs"
+      component: "haskell-trials:exe:rosalind_corr"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_corr"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_corr"
+
+    - path: "app/rosalind_inod.hs"
+      component: "haskell-trials:exe:rosalind_inod"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_inod"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_inod"
+
+    - path: "app/rosalind_kmer.hs"
+      component: "haskell-trials:exe:rosalind_kmer"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_kmer"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_kmer"
+
+    - path: "app/rosalind_kmp.hs"
+      component: "haskell-trials:exe:rosalind_kmp"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_kmp"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_kmp"
+
+    - path: "app/rosalind_lcsq.hs"
+      component: "haskell-trials:exe:rosalind_lcsq"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_lcsq"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_lcsq"
+
+    - path: "app/rosalind_lgis.hs"
+      component: "haskell-trials:exe:rosalind_lgis"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_lgis"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_lgis"
+
+    - path: "app/rosalind_pmch.hs"
+      component: "haskell-trials:exe:rosalind_pmch"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_pmch"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_pmch"
+
+    - path: "app/rosalind_pper.hs"
+      component: "haskell-trials:exe:rosalind_pper"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_pper"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_pper"
+
+    - path: "app/rosalind_sign.hs"
+      component: "haskell-trials:exe:rosalind_sign"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_sign"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_sign"
+
+    - path: "app/rosalind_splc.hs"
+      component: "haskell-trials:exe:rosalind_splc"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_splc"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_splc"
+
+    - path: "app/rosalind_sseq.hs"
+      component: "haskell-trials:exe:rosalind_sseq"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_sseq"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_sseq"
+
+    - path: "app/rosalind_tran.hs"
+      component: "haskell-trials:exe:rosalind_tran"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rosalind_tran"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rosalind_tran"
+
+    - path: "app/rotating-cube.hs"
+      component: "haskell-trials:exe:rotating-cube"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rotating-cube"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rotating-cube"
+
+    - path: "app/rotating-cube-2.hs"
+      component: "haskell-trials:exe:rotating-cube-2"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:rotating-cube-2"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:rotating-cube-2"
+
+    - path: "app/second.hs"
+      component: "haskell-trials:exe:second"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:second"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:second"
+
+    - path: "app/third.hs"
+      component: "haskell-trials:exe:third"
+
+    - path: "app/Main.hs"
+      component: "haskell-trials:exe:third"
+
+    - path: "app/Paths_haskell_trials.hs"
+      component: "haskell-trials:exe:third"

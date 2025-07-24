@@ -1,23 +1,46 @@
-import qualified Data.ByteString.Char8 as B
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
+
+import Data.Aeson
+import qualified Data.ByteString as B
+import Data.Maybe (fromMaybe)
+import GHC.Generics
 import Network.HTTP.Simple
-import Text.Printf (printf)
 
-forLoopTest :: Int -> IO ()
-forLoopTest 5 = return ()
-forLoopTest val = do
-  printf "Doing this step %d times.\n" val
-  forLoopTest (val + 1)
+-- import Text.Printf (printf)
 
-repeatNTimes :: (Monad m) => Int -> m a -> m ()
-repeatNTimes 0 _ = return ()
-repeatNTimes n action = do
-  _ <- action
-  repeatNTimes (n - 1) action
+data Post = Post
+  { userId :: Int,
+    postId :: Int,
+    title :: String,
+    body :: String
+  }
+  deriving (Show, Generic)
 
-getLinesFromFile :: FilePath -> IO [String]
-getLinesFromFile filename = do
-  contents <- readFile filename
-  return $ lines contents
+instance FromJSON Post where
+  parseJSON = withObject "Post" $ \v ->
+    Post
+      <$> v .: "userId"
+      <*> v .: "id"
+      <*> v .: "title"
+      <*> v .: "body"
+
+-- forLoopTest :: Int -> IO ()
+-- forLoopTest 5 = return ()
+-- forLoopTest val = do
+--   printf "Doing this step %d times.\n" val
+--   forLoopTest (val + 1)
+
+-- repeatNTimes :: (Monad m) => Int -> m a -> m ()
+-- repeatNTimes 0 _ = return ()
+-- repeatNTimes n action = do
+--   _ <- action
+--   repeatNTimes (n - 1) action
+
+-- getLinesFromFile :: FilePath -> IO [String]
+-- getLinesFromFile filename = do
+--   contents <- readFile filename
+--   return $ lines contents
 
 getDataFromWebsite :: String -> IO B.ByteString
 getDataFromWebsite url = do
@@ -25,8 +48,20 @@ getDataFromWebsite url = do
   response <- httpBS request
   return $ getResponseBody response
 
-stripCR :: String -> String
-stripCR = filter (/= '\r')
+-- getDataFromWebsite :: String -> IO B.ByteString
+-- getDataFromWebsite url = do
+--   request <- parseRequest url
+--   response <- httpBS request
+--   return $ getResponseBody response
+
+getPostsFromWebsite :: String -> IO [Post]
+getPostsFromWebsite url = do
+  response <- getDataFromWebsite url
+  let maybePosts = decode (B.fromStrict response) :: Maybe [Post]
+  return $ fromMaybe [] maybePosts
+
+-- stripCR :: String -> String
+-- stripCR = filter (/= '\r')
 
 main :: IO ()
 main = do
@@ -40,6 +75,6 @@ main = do
 
   -- mapM_ putStrLn lines'
 
-  content <- getDataFromWebsite "https://jsonplaceholder.typicode.com/posts"
+  content <- getPostsFromWebsite "https://jsonplaceholder.typicode.com/posts"
 
-  putStrLn $ stripCR $ B.unpack content
+  mapM_ (\l -> putStrLn $ show (postId l) ++ ": " ++ title l) content

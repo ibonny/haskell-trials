@@ -8,7 +8,7 @@ extra-doc-files: CHANGELOG.md
 
 # Common dependencies and GHC options for all executables
 dependencies:
-  - base >= 4.7 && < 5
+  - base >= 4.18.0.0 && < 4.19.0.0
 
 ghc-options:
   - -Wall
@@ -25,8 +25,6 @@ executables:
   haskell-trials:
     main: Main.hs
     source-dirs: app
-    dependencies:
-      - base ^>= 4.18.3.0
 
   first:
     main: first.hs
@@ -50,6 +48,7 @@ executables:
     dependencies:
       - bytestring
       - http-conduit
+      - aeson
 
   monadic-test:
     main: monadic-test.hs
@@ -79,12 +78,12 @@ executables:
     main: rosalind_pper.hs
     source-dirs: app
 
-  rosalind_prob:
-    main: rosalind_prob.hs
-    source-dirs: app
-    dependencies:
-      - split
-      - text
+  # rosalind_prob:
+  #   main: rosalind_prob.hs
+  #   source-dirs: app
+  #   dependencies:
+  #     - split
+  #     - text
 
   rosalind_sign:
     main: rosalind_sign.hs

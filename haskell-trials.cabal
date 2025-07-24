@@ -24,7 +24,7 @@ executable ansi-test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       ansi-terminal
-    , base >=4.7 && <5
+    , base >=4.18.0.0 && <4.19.0.0
     , vector
   default-language: Haskell2010
 
@@ -37,7 +37,7 @@ executable first
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable fourth
@@ -49,7 +49,8 @@ executable fourth
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.18.0.0 && <4.19.0.0
     , bytestring
     , http-conduit
   default-language: Haskell2010
@@ -62,7 +63,7 @@ executable haskell-trials
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.18.3.0 && <4.19
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable monadic-test
@@ -74,7 +75,7 @@ executable monadic-test
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
     , bytestring >=0.11.5.4
     , http-conduit >=2.3.9.1
   default-language: Haskell2010
@@ -89,7 +90,7 @@ executable rosalind_cat
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       array
-    , base >=4.7 && <5
+    , base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable rosalind_corr
@@ -102,7 +103,7 @@ executable rosalind_corr
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       array
-    , base >=4.7 && <5
+    , base >=4.18.0.0 && <4.19.0.0
     , containers
   default-language: Haskell2010
 
@@ -115,7 +116,7 @@ executable rosalind_inod
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable rosalind_kmer
@@ -127,7 +128,7 @@ executable rosalind_kmer
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable rosalind_kmp
@@ -139,7 +140,7 @@ executable rosalind_kmp
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable rosalind_lcsq
@@ -151,7 +152,7 @@ executable rosalind_lcsq
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable rosalind_lgis
@@ -163,7 +164,7 @@ executable rosalind_lgis
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
     , split
     , text
   default-language: Haskell2010
@@ -177,7 +178,7 @@ executable rosalind_pmch
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable rosalind_pper
@@ -189,21 +190,7 @@ executable rosalind_pper
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
-  default-language: Haskell2010
-
-executable rosalind_prob
-  main-is: rosalind_prob.hs
-  other-modules:
-      Main
-      Paths_haskell_trials
-  hs-source-dirs:
-      app
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
-  build-depends:
-      base >=4.7 && <5
-    , split
-    , text
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable rosalind_sign
@@ -215,7 +202,7 @@ executable rosalind_sign
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
     , text
   default-language: Haskell2010
 
@@ -228,7 +215,7 @@ executable rosalind_splc
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
     , text
   default-language: Haskell2010
 
@@ -241,7 +228,7 @@ executable rosalind_sseq
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010
 
 executable rosalind_tran
@@ -253,7 +240,7 @@ executable rosalind_tran
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
     , split
   default-language: Haskell2010
 
@@ -267,7 +254,7 @@ executable rotating-cube
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       ansi-terminal >=1.1.2 && <1.2
-    , base >=4.7 && <5
+    , base >=4.18.0.0 && <4.19.0.0
     , mtl
     , vector
   default-language: Haskell2010
@@ -283,7 +270,7 @@ executable rotating-cube-2
   build-depends:
       ansi-terminal >=1.1.2 && <1.2
     , array
-    , base >=4.7 && <5
+    , base >=4.18.0.0 && <4.19.0.0
     , mtl
     , terminal-size
     , vector
@@ -299,7 +286,7 @@ executable second
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       aeson >=2.2.3.0
-    , base >=4.7 && <5
+    , base >=4.18.0.0 && <4.19.0.0
     , http-client
     , http-client-tls
   default-language: Haskell2010
@@ -313,5 +300,5 @@ executable third
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      base >=4.18.0.0 && <4.19.0.0
   default-language: Haskell2010

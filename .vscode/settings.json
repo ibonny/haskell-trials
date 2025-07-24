@@ -11,5 +11,9 @@
   "editor.defaultFormatter": "haskell.haskell",
   "notebook.defaultFormatter": "haskell.haskell",
   "haskell.manageHLS": "GHCup",
-  "haskell.plugin.cabal-gild.config.path": "/home/codespace/.local/bin/cabal-gild"
+  "haskell.plugin.cabal-gild.config.path": "/home/codespace/.local/bin/cabal-gild",
+  "haskell.serverExecutablePath": "/home/codespace/.ghcup/bin/haskell-language-server-wrapper",
+  "haskell.toolchain": {
+    "ghc": "9.6.7"
+  }
 }

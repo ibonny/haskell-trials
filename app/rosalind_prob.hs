@@ -1,6 +1,8 @@
+module Main (main) where
+
 import Data.List.Split
-import Text.Printf (printf)
 import qualified Data.Text as T
+import Text.Printf (printf)
 
 stringToNumbers :: [String] -> [Double]
 stringToNumbers = map read
@@ -13,10 +15,10 @@ atContent x = (1 - x) / 2
 
 calcProbOfStr :: String -> Double -> Double
 calcProbOfStr "" _ = 1
-calcProbOfStr (x:xs) p
-  | x == 'C'  = cgContent p * calcProbOfStr xs p
-  | x == 'G'  = cgContent p * calcProbOfStr xs p
-  | x == 'A'  = atContent p * calcProbOfStr xs p
+calcProbOfStr (x : xs) p
+  | x == 'C' = cgContent p * calcProbOfStr xs p
+  | x == 'G' = cgContent p * calcProbOfStr xs p
+  | x == 'A' = atContent p * calcProbOfStr xs p
   | otherwise = atContent p * calcProbOfStr xs p
 
 main :: IO ()
@@ -29,7 +31,7 @@ main = do
 
   let probsArray = stringToNumbers $ splitOn " " probs
 
-  let finalResult = [ logBase 10 $ calcProbOfStr str x | x <- probsArray ]
+  let finalResult = [logBase 10 $ calcProbOfStr str x | x <- probsArray]
 
   let printableResult = foldl (printf "%s %.3f") "" finalResult
 
