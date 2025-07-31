@@ -1,5 +1,6 @@
 module Main (main) where
 
+import qualified Control.Monad
 import Data.List (tails)
 import Text.Printf (printf)
 
@@ -20,7 +21,8 @@ readFastaFile filename = do
 
 -- Generate all k-mers of length 4
 fourMers :: [String]
-fourMers = sequence (replicate 4 bases)
+-- fourMers = sequence (replicate 4 bases)
+fourMers = Control.Monad.replicateM 4 bases
 
 countKmers :: String -> [(String, Int)]
 countKmers seq' = [(kmer, length $ filter (== kmer) allKmers) | kmer <- fourMers]

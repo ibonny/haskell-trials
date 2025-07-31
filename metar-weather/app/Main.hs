@@ -6,6 +6,7 @@ module Main (main) where
 import Control.Applicative
 import Control.Monad
 import Data.Aeson (FromJSON, eitherDecode, parseJSON)
+import Data.Maybe (fromMaybe)
 import Data.Time.Clock
 import Data.Time.Clock.POSIX
 import Data.Time.Format
@@ -15,7 +16,6 @@ import Network.HTTP.Simple
 import System.Environment
 import System.Exit
 import Text.Printf (printf)
-import Data.Maybe (fromMaybe)
 
 -- https://aviationweather.gov/api/data/metar?ids=KMCI&format=json
 
@@ -103,7 +103,7 @@ timestampToUTC = posixSecondsToUTCTime . fromIntegral
 -- formatDate = formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S"
 
 customTimeZone :: TimeZone
-customTimeZone = TimeZone (-300) False "EST5EDT"
+customTimeZone = TimeZone (-240) False "EST5EDT"
 
 timestampToCustomTZ :: Integer -> ZonedTime
 timestampToCustomTZ timestamp =
@@ -135,7 +135,7 @@ knotsToMph :: Int -> Float
 knotsToMph windSpeedKt = fromIntegral windSpeedKt * 1.15078
 
 celciusToFahrenheight :: Float -> Float
-celciusToFahrenheight cValue = 9/5 * cValue + 32
+celciusToFahrenheight cValue = 9 / 5 * cValue + 32
 
 calculateRelativeHumidity :: Float -> Float -> Float
 calculateRelativeHumidity temp_c dewpoint_c =
@@ -143,7 +143,7 @@ calculateRelativeHumidity temp_c dewpoint_c =
   let a = 17.625
       b = 243.04
       alpha = (a * dewpoint_c) / (b + dewpoint_c)
-      beta  = (a * temp_c) / (b + temp_c)
+      beta = (a * temp_c) / (b + temp_c)
    in 100 * exp (alpha - beta)
 
 -- Get request function
@@ -157,26 +157,26 @@ makeGetRequest url = do
 
 getWindDirString :: Int -> String
 getWindDirString val
-    | val == 0 = "North"
-    | val > 0 && val < 45 = "North North-East"
-    | val == 45 = "North East"
-    | val > 45 && val < 90 = "East North-East"
-    | val == 90 = "East"
-    | val > 90 && val < 135 = "East South-East"
-    | val == 135 = "South East"
-    | val > 135 && val < 180 = "South South-East"
-    | val == 180 = "South"
-    | val > 180 && val < 225 = "South South-West"
-    | val == 225 = "South West"
-    | val > 225 && val < 275 = "West South-West"
-    | val == 270 = "West"
-    | val > 270 && val < 315 = "West North-West"
-    | val == 315 = "North West"
-    | val > 315 && val < 360 = "North North-West"
-    | otherwise = printf "%d" val
+  | val == 0 = "North"
+  | val > 0 && val < 45 = "North North-East"
+  | val == 45 = "North East"
+  | val > 45 && val < 90 = "East North-East"
+  | val == 90 = "East"
+  | val > 90 && val < 135 = "East South-East"
+  | val == 135 = "South East"
+  | val > 135 && val < 180 = "South South-East"
+  | val == 180 = "South"
+  | val > 180 && val < 225 = "South South-West"
+  | val == 225 = "South West"
+  | val > 225 && val < 275 = "West South-West"
+  | val == 270 = "West"
+  | val > 270 && val < 315 = "West North-West"
+  | val == 315 = "North West"
+  | val > 315 && val < 360 = "North North-West"
+  | otherwise = printf "%d" val
 
-defaultNumStringValue :: NumberOrString
-defaultNumStringValue = NumStringValue "0"
+-- defaultNumStringValue :: NumberOrString
+-- defaultNumStringValue = NumStringValue "0"
 
 defaultFloatStringValue :: FloatOrString
 defaultFloatStringValue = FloatStringValue "0"
@@ -193,26 +193,29 @@ outputData weather = do
   printf "Observation time: %s\n" $ formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S %Z" localTime
   printf "METAR: %s\n" $ rawOb weather
 
-  if wspd weather /= 0 then do
-    printf "Wind Dir: %s (%s)\n" (getWindDirString $ numProcessFieldToNum $ wdir weather) (numProcessField $ wdir weather)
-    printf "Wind Speed: %0.2fmph " $ knotsToMph $ wspd weather
-  else
-    printf "No wind"
+  if wspd weather /= 0
+    then do
+      printf "Wind Dir: %s (%s)\n" (getWindDirString $ numProcessFieldToNum $ wdir weather) (numProcessField $ wdir weather)
+      printf "Wind Speed: %0.2fmph " $ knotsToMph $ wspd weather
+    else
+      printf "No wind"
 
-  if fromMaybe 0 (wgst weather) /= 0 then
-    printf "gusting to %0.2fmph\n" $ knotsToMph $ fromMaybe 0 $ wgst weather
-  else
-    printf "\n"
+  if fromMaybe 0 (wgst weather) /= 0
+    then
+      printf "gusting to %0.2fmph\n" $ knotsToMph $ fromMaybe 0 $ wgst weather
+    else
+      printf "\n"
 
   printf "Temperature: %0.2fF\n" $ celciusToFahrenheight $ temp weather
   printf "Dew Point: %0.2fF\n" $ celciusToFahrenheight $ dewp weather
 
   printf "Relative Humidity: %0.2f%%\n" $ calculateRelativeHumidity (temp weather) (dewp weather)
 
-  if floatProcessFieldToFloat (fromMaybe defaultFloatStringValue (presTend weather)) /= 0 then
-    printf "Pressure Tendency: %s mBar\n" $ floatProcessField $ fromMaybe defaultFloatStringValue $ presTend weather
-  else
-    printf ""
+  if floatProcessFieldToFloat (fromMaybe defaultFloatStringValue (presTend weather)) /= 0
+    then
+      printf "Pressure Tendency: %s mBar\n" $ floatProcessField $ fromMaybe defaultFloatStringValue $ presTend weather
+    else
+      printf ""
 
   printf "Altimeter: %0.2f mb\n" $ altim weather
 
@@ -220,10 +223,11 @@ outputData weather = do
 
   printf "Visibility: %s statute miles\n" $ numProcessField $ visib weather
 
-  if fromMaybe defaultFloatStringValue (precip weather) /= defaultFloatStringValue then
-    printf "Precipitation: %s in\n" $ floatProcessField $ fromMaybe defaultFloatStringValue $ precip weather
-  else
-    printf ""
+  if fromMaybe defaultFloatStringValue (precip weather) /= defaultFloatStringValue
+    then
+      printf "Precipitation: %s in\n" $ floatProcessField $ fromMaybe defaultFloatStringValue $ precip weather
+    else
+      printf ""
 
   case pcp24hr weather of
     Just number -> printf "Precip last 24 hours: %0.2f\n" number
@@ -233,10 +237,11 @@ outputData weather = do
 
 loopData :: [Weather] -> IO ()
 loopData weather =
-    if null weather then
-        printf "Airport cannot be found.\n"
+  if null weather
+    then
+      printf "Airport cannot be found.\n"
     else
-        mapM_ outputData weather
+      mapM_ outputData weather
 
 main :: IO ()
 main = do

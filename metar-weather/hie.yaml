@@ -1,0 +1,3 @@
+cradle:
+  cabal:
+    component: "metar-weather:exe:metar-weather"

@@ -1,4 +1,5 @@
 package-dbs: clear, global
 ignore-project: False
 tests: True
-with-compiler: /home/codespace/.ghcup/bin/ghc
+with-compiler: /home/gitpod/.ghcup/bin/ghc
+multi-repl: True
