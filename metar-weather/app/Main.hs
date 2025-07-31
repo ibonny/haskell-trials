@@ -3,18 +3,20 @@
 
 module Main (main) where
 
-import Control.Applicative
-import Control.Monad
+import Control.Applicative (Alternative ((<|>)))
+import Control.Monad (when)
 import Data.Aeson (FromJSON, eitherDecode, parseJSON)
 import Data.Maybe (fromMaybe)
-import Data.Time.Clock
-import Data.Time.Clock.POSIX
-import Data.Time.Format
-import Data.Time.LocalTime
-import GHC.Generics
-import Network.HTTP.Simple
-import System.Environment
-import System.Exit
+import Data.Time.Clock (UTCTime)
+import Data.Time.Clock.POSIX (posixSecondsToUTCTime)
+import Data.Time.Format (defaultTimeLocale, formatTime)
+import Data.Time.LocalTime (TimeZone (..), ZonedTime (..))
+import Data.Time.Zones (utcToLocalTimeTZ)
+import Data.Time.Zones.All (TZLabel (EST5EDT), tzByLabel)
+import GHC.Generics (Generic)
+import Network.HTTP.Simple (getResponseBody, httpLBS, parseRequest)
+import System.Environment (getArgs)
+import System.Exit (exitFailure)
 import Text.Printf (printf)
 
 -- https://aviationweather.gov/api/data/metar?ids=KMCI&format=json
@@ -94,21 +96,16 @@ data Weather = Weather
 
 instance FromJSON Weather
 
--- Convert Unix timestamp (seconds since epoch) to UTCTime
 timestampToUTC :: Integer -> UTCTime
-timestampToUTC = posixSecondsToUTCTime . fromIntegral
+timestampToUTC timestamp = posixSecondsToUTCTime $ fromIntegral timestamp
 
--- -- Format the UTCTime as a readable string
--- formatDate :: UTCTime -> String
--- formatDate = formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S"
-
-customTimeZone :: TimeZone
-customTimeZone = TimeZone (-240) False "EST5EDT"
-
-timestampToCustomTZ :: Integer -> ZonedTime
-timestampToCustomTZ timestamp =
+timestampToEstTZ :: Integer -> IO ZonedTime
+timestampToEstTZ timestamp = do
+  let tz = tzByLabel EST5EDT -- America__New_York
   let utcTime = timestampToUTC timestamp
-   in utcToZonedTime customTimeZone utcTime
+      localTime = utcToLocalTimeTZ tz utcTime
+      timeZone = TimeZone (-300) True "EST"
+  return $ ZonedTime localTime timeZone
 
 numProcessField :: NumberOrString -> String
 numProcessField (NumberValue n) = show n
@@ -188,9 +185,10 @@ outputData weather = do
   -- let date = timestampToUTC $ obsTime weather
   -- let obsTimeStr = formatDate date
 
-  let localTime = timestampToCustomTZ $ obsTime weather
+  localTime <- timestampToEstTZ $ obsTime weather
 
   printf "Observation time: %s\n" $ formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S %Z" localTime
+
   printf "METAR: %s\n" $ rawOb weather
 
   if wspd weather /= 0
