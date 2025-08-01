@@ -92,19 +92,19 @@ renderCube :: App ()
 renderCube = do
   let loop x y
         | x >= defaultCubeWidth = return ()
-        | y >= defaultCubeWidth = loop (x + incrementSpeed) (- defaultCubeWidth)
+        | y >= defaultCubeWidth = loop (x + incrementSpeed) (-defaultCubeWidth)
         | otherwise = do
-          mapM_
-            (\(cx, cy, cz, ch) -> calculateForSurface cx cy cz ch)
-            [ (x, y, - defaultCubeWidth, '@'),
-              (defaultCubeWidth, y, x, '$'),
-              (- defaultCubeWidth, y, - x, '%'),
-              (- x, y, defaultCubeWidth, '#'),
-              (x, - defaultCubeWidth, - y, ';'),
-              (x, defaultCubeWidth, y, '+')
-            ]
-          loop x (y + incrementSpeed)
-  loop (- defaultCubeWidth) (- defaultCubeWidth)
+            mapM_
+              (\(cx, cy, cz, ch) -> calculateForSurface cx cy cz ch)
+              [ (x, y, -defaultCubeWidth, '@'),
+                (defaultCubeWidth, y, x, '$'),
+                (-defaultCubeWidth, y, -x, '%'),
+                (-x, y, defaultCubeWidth, '#'),
+                (x, -defaultCubeWidth, -y, ';'),
+                (x, defaultCubeWidth, y, '+')
+              ]
+            loop x (y + incrementSpeed)
+  loop (-defaultCubeWidth) (-defaultCubeWidth)
 
 renderFrame :: App ()
 renderFrame = do
